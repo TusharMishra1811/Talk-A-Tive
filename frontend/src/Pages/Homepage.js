@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Container,
   Box,
@@ -11,8 +11,17 @@ import {
 } from "@chakra-ui/react";
 import Login from "../components/Authentication/Login";
 import Signup from "../components/Authentication/Signup";
+import { useHistory } from "react-router-dom";
 
 const HomePage = () => {
+  const history = useHistory();
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("userInfo"));
+
+    if (user) history.push("/chats");
+  }, [history]);
+
   return (
     <Container maxW="xl" centerContent>
       {/* Box is same as div in html */}
@@ -26,7 +35,12 @@ const HomePage = () => {
         borderRadius="2xl"
         borderWidth="1px"
       >
-        <Text fontSize="4xl" fontFamily="Baloo Chettan 2" color="#eb345e" textDecoration= "underline">
+        <Text
+          fontSize="4xl"
+          fontFamily="Baloo Chettan 2"
+          color="#eb345e"
+          textDecoration="underline"
+        >
           Talk-A-Tive
         </Text>
       </Box>
